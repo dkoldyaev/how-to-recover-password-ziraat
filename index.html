@@ -39,6 +39,7 @@
             margin: 15px auto;
             border: 1px solid #eee;
             border-radius: 5px;
+            cursor: pointer; /* Добавлено для индикации кликабельности */
         }
         .highlight {
             background-color: #fff3cd;
@@ -57,6 +58,108 @@
             margin: 0;
             font-style: italic;
         }
+
+        /* Стили для секции "Сказать спасибо" */
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #0056b3;
+        }
+        .card-header p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+        .accordion {
+            border-bottom: 1px solid #eee;
+        }
+        .accordion:last-child {
+            border-bottom: none;
+        }
+        .accordion-summary {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        .accordion-summary:hover {
+            background-color: #f0f0f0;
+        }
+        .accordion-summary img {
+            width: 24px;
+            height: 24px;
+            margin-inline-end: 16px;
+            border: none; /* Убираем рамку для иконок */
+            cursor: default; /* Иконки аккордеона не должны быть курсором pointer */
+        }
+        .accordion-summary p {
+            margin: 0;
+            font-weight: bold;
+            color: #333;
+        }
+        .accordion-details {
+            padding: 15px 20px;
+            background-color: #fdfdfd;
+            border-top: 1px solid #eee;
+            display: none; /* Скрыто по умолчанию */
+        }
+        .accordion-details p {
+            margin: 0;
+        }
+        .accordion-details a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .accordion-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* Стили для модального окна просмотра изображений */
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed; /* Оставаться на месте */
+            z-index: 1000; /* Сильнее, чем другие элементы */
+            padding-top: 50px; /* Положение окна */
+            left: 0;
+            top: 0;
+            width: 100%; /* Полная ширина */
+            height: 100%; /* Полная высота */
+            overflow: auto; /* Включить прокрутку, если изображение слишком большое */
+            background-color: rgba(0,0,0,0.9); /* Черный фон с прозрачностью */
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain; /* Сохраняет соотношение сторон, вмещая изображение */
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -66,7 +169,7 @@
     <div class="step">
         <h2>Шаг 1: Открытие DevTools</h2>
         <p>Нажмите правой кнопкой мыши в любом месте страницы и выберите пункт <span class="highlight">"Inspect"</span> (или "Просмотреть код элемента"). Откроется окно DevTools (Инструменты разработчика).</p>
-        <img src="/how-to-recover-password-ziraat/image-1.png" alt="Открытие DevTools">
+        <img src="/how-to-recover-password-ziraat/image-1.png" alt="Открытие DevTools" onclick="openModal(this)">
     </div>
 
     <div class="step">
@@ -74,21 +177,21 @@
         <p>В левом верхнем углу окна DevTools нажмите кнопку со значком стрелочки (она позволяет выбрать элемент на странице).</p>
         <p>Затем кликните по полю ввода номера паспорта (где требуется ввести ID).</p>
         <p>После этого соответствующий элемент <span class="highlight">input</span> будет автоматически выбран в панели "Elements" DevTools.</p>
-        <img src="/how-to-recover-password-ziraat/image-2.png" alt="Выбранный input элемент">
+        <img src="/how-to-recover-password-ziraat/image-2.png" alt="Выбранный input элемент" onclick="openModal(this)">
     </div>
 
     <div class="step">
         <h2>Шаг 3: Редактирование атрибута class</h2>
         <p>В панели "Elements" найдите выбранный элемент <span class="highlight">&lt;input&gt;</span>. Дважды кликните на атрибут <span class="highlight">class</span>, чтобы он стал доступен для редактирования.</p>
-        <img src="/how-to-recover-password-ziraat/image-3.png" alt="Редактирование class атрибута">
+        <img src="/how-to-recover-password-ziraat/image-3.png" alt="Редактирование class атрибута" onclick="openModal(this)">
         <p>Удалите всё содержимое этого атрибута. После удаления, атрибут <span class="highlight">class</span> должен остаться пустым.</p>
-        <img src="/how-to-recover-password-ziraat/image-4.png" alt="Удаленное содержимое class">
+        <img src="/how-to-recover-password-ziraat/image-4.png" alt="Удаленное содержимое class" onclick="openModal(this)">
     </div>
 
     <div class="step">
         <h2>Шаг 4: Изменение внешнего вида поля</h2>
         <p>В результате этих действий поле ввода номера паспорта на веб-сайте должно стать "безликим" и нестилизованным, потеряв свою оригинальную разметку и проверку.</p>
-        <img src="/how-to-recover-password-ziraat/image-5.png" alt="Итоговая картинка">
+        <img src="/how-to-recover-password-ziraat/image-5.png" alt="Итоговая картинка" onclick="openModal(this)">
     </div>
 
     <div class="step">
@@ -99,6 +202,90 @@
     <div class="note">
         <p><strong>Важное примечание:</strong> Данные действия изменяют поведение веб-страницы только на вашей стороне и не влияют на серверную логику. Используйте эту инструкцию только в случае, если вы понимаете возможные последствия и действуете на свой страх и риск.</p>
     </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Сказать спасибо</h2>
+            <p>Если эта инструкция вам помогла, вы можете меня отблагодарить любым из следующих способов:</p>
+        </div>
+
+        <div class="accordion" onclick="toggleAccordion(this)">
+            <div class="accordion-summary">
+                <img src="buymeacoffee.svg" alt="buymeacoffee logo">
+                <p>buymeacoffee</p>
+            </div>
+            <div class="accordion-details">
+                <p><a target="_blank" href="https://buymeacoffee.com/dkoldyaevf">https://buymeacoffee.com/dkoldyaevf</a></p>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="toggleAccordion(this)">
+            <div class="accordion-summary">
+                <img src="tinkoff.png" alt="тинькофф logo">
+                <p>тинькофф</p>
+            </div>
+            <div class="accordion-details">
+                <p><a target="_blank" href="https://www.tbank.ru/cf/75mfKA8AKDQ">https://www.tbank.ru/cf/75mfKA8AKDQ</a></p>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="toggleAccordion(this)">
+            <div class="accordion-summary">
+                <img src="tbc_filled.svg" alt="TBC logo" style="fill: #00adee; stroke: #00adee;">
+                <p>TBC (Грузия)</p>
+            </div>
+            <div class="accordion-details">
+                <p>GE95 TB71 4894 5168 2000 01</p>
+            </div>
+        </div>
+
+        <div class="accordion" onclick="toggleAccordion(this)">
+            <div class="accordion-summary">
+                <img src="TC_Ziraat_Bankası_logo.svg" alt="Ziraat logo">
+                <p>Ziraat (Турция)</p>
+            </div>
+            <div class="accordion-details">
+                <p>TR88 0001 0090 1021 2398 7050 01</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        // Функция для переключения аккордеона
+        function toggleAccordion(element) {
+            const details = element.querySelector('.accordion-details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+
+        // Функционал для модального окна просмотра изображений
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+
+        function openModal(imgElement) {
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Закрытие модального окна при клике вне изображения
+        modal.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
